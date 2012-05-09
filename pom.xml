@@ -40,6 +40,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.yammer.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <version>${dep.yammer.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.jdbi</groupId>
       <artifactId>jdbi</artifactId>
       <version>2.33.3</version>
@@ -79,6 +85,12 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nesscomputing.testing</groupId>
+      <artifactId>findbugs-annotations</artifactId>
+      <version>2.0.0</version>
     </dependency>
 
     <dependency>

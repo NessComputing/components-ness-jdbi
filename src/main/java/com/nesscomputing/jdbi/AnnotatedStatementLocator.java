@@ -95,10 +95,10 @@ public class AnnotatedStatementLocator implements StatementLocator
             return sqlLocator.getTemplate(fieldElements[1].substring(markerString.length()), context);
         }
         catch (ClassNotFoundException cnfe) {
-            // Ignore, fall back to default locator.
+            LOG.trace(cnfe, "Ignoring, falling back to default locator");
         }
         catch (IllegalArgumentException ex) {
-            // Ignore, fall back to default locator.
+            LOG.trace(ex, "Ignoring, falling back to default locator");
         }
 
         return defaultLocate(statementName, context);

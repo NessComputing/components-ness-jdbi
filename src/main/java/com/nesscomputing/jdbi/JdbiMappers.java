@@ -16,6 +16,9 @@
 package com.nesscomputing.jdbi;
 
 import com.google.common.base.Preconditions;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.joda.time.DateTime;
 
 import java.net.URI;
@@ -38,6 +41,7 @@ public final class JdbiMappers
     /**
      * Returns a Boolean or null if the column was null.
      */
+    @SuppressFBWarnings("NP_BOOLEAN_RETURN_NULL")
     public static Boolean getBoolean(final ResultSet rs, final String columnName) throws SQLException
     {
         final boolean res = rs.getBoolean(columnName);
@@ -52,6 +56,7 @@ public final class JdbiMappers
     /**
      * Returns a Boolean or null if the column was null.
      */
+    @SuppressFBWarnings("NP_BOOLEAN_RETURN_NULL")
     public static Boolean getBoolean(final ResultSet rs, final int columnIndex) throws SQLException
     {
         final boolean res = rs.getBoolean(columnIndex);
@@ -99,14 +104,14 @@ public final class JdbiMappers
     /**
      * Returns an URI representing the data or null if the input is null.
      */
-    public static final URI getURI(final ResultSet rs, final String columnName) throws SQLException
+    public static URI getURI(final ResultSet rs, final String columnName) throws SQLException
     {
         final String str = rs.getString(columnName);
 
         return (str == null) ? null : URI.create(str);
     }
 
-    public static final URI getURI(final ResultSet rs, final int columnIndex) throws SQLException
+    public static URI getURI(final ResultSet rs, final int columnIndex) throws SQLException
     {
         final String str = rs.getString(columnIndex);
 
@@ -117,7 +122,7 @@ public final class JdbiMappers
      * Returns an array of Strings or null if the input is null. Null is intentional (not empty list), to be
      * able to distinguish between null value and empty list in the db.
      */
-    public static final List<String> getStringList(final ResultSet rs, final String columnName) throws SQLException
+    public static List<String> getStringList(final ResultSet rs, final String columnName) throws SQLException
     {
         final Array ary = rs.getArray(columnName);
         if (ary != null) {
@@ -127,7 +132,7 @@ public final class JdbiMappers
         return null;
     }
 
-    public static final List<String> getStringList(final ResultSet rs, final int columnIndex) throws SQLException
+    public static List<String> getStringList(final ResultSet rs, final int columnIndex) throws SQLException
     {
         final Array ary = rs.getArray(columnIndex);
         if (ary != null) {
@@ -141,7 +146,7 @@ public final class JdbiMappers
      * Returns an array of Integer or null if the input is null. Null is intentional (not empty list), to be
      * able to distinguish between null value and empty list in the db.
      */
-    public static final List<Integer> getIntegerList(final ResultSet rs, final String columnName) throws SQLException
+    public static List<Integer> getIntegerList(final ResultSet rs, final String columnName) throws SQLException
     {
         final Array ary = rs.getArray(columnName);
         if (ary != null) {
@@ -151,7 +156,7 @@ public final class JdbiMappers
         return null;
     }
 
-    public static final List<Integer> getIntegerList(final ResultSet rs, final int columnIndex) throws SQLException
+    public static List<Integer> getIntegerList(final ResultSet rs, final int columnIndex) throws SQLException
     {
         final Array ary = rs.getArray(columnIndex);
         if (ary != null) {
@@ -165,7 +170,7 @@ public final class JdbiMappers
      * Returns an array of Long or null if the input is null. Null is intentional (not empty list), to be
      * able to distinguish between null value and empty list in the db.
      */
-    public static final List<Long> getLongList(final ResultSet rs, final String columnName) throws SQLException
+    public static List<Long> getLongList(final ResultSet rs, final String columnName) throws SQLException
     {
         final Array ary = rs.getArray(columnName);
         if (ary != null) {
@@ -175,7 +180,7 @@ public final class JdbiMappers
         return null;
     }
 
-    public static final List<Long> getLongList(final ResultSet rs, final int columnIndex) throws SQLException
+    public static List<Long> getLongList(final ResultSet rs, final int columnIndex) throws SQLException
     {
         final Array ary = rs.getArray(columnIndex);
         if (ary != null) {
