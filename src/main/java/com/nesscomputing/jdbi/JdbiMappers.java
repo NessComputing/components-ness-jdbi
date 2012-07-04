@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.net.URI;
 import java.sql.Array;
@@ -82,6 +83,24 @@ public final class JdbiMappers
         final Timestamp ts = rs.getTimestamp(columnIndex);
 
         return (ts == null) ? null : new DateTime(ts);
+    }
+
+
+    /**
+     * Returns a DateTime object representing the date in UTC or null if the input is null.
+     */
+    public static DateTime getUTCDateTime(final ResultSet rs, final String columnName) throws SQLException
+    {
+        final Timestamp ts = rs.getTimestamp(columnName);
+
+        return (ts == null) ? null : new DateTime(ts).withZone(DateTimeZone.UTC);
+    }
+
+    public static DateTime getUTCDateTime(final ResultSet rs, final int columnIndex) throws SQLException
+    {
+        final Timestamp ts = rs.getTimestamp(columnIndex);
+
+        return (ts == null) ? null : new DateTime(ts).withZone(DateTimeZone.UTC);
     }
 
     /**
