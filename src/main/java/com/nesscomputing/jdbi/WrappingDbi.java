@@ -23,7 +23,9 @@ import org.skife.jdbi.v2.tweak.StatementRewriter;
 
 /**
  * Wraps a DBI so that the statement locator, builder, or rewriter can be set without affecting the delegate DBI.
+ * @deprecated this class cannot really be made to work if the DBI interface is ever extended
  */
+@Deprecated
 public class WrappingDbi extends DbiAdapter implements IDBI
 {
     private final StatementLocator locator;
