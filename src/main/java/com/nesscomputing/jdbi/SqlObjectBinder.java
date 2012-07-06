@@ -35,7 +35,7 @@ public final class SqlObjectBinder
     private static enum Style
     {
         ON_DEMAND, OPEN
-    };
+    }
 
     private SqlObjectBinder()
     {
