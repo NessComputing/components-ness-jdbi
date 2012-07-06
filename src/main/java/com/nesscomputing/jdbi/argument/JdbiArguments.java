@@ -18,6 +18,8 @@ package com.nesscomputing.jdbi.argument;
 import java.sql.Types;
 import java.util.Collection;
 
+import com.nesscomputing.types.PlatformId;
+
 public final class JdbiArguments
 {
     private JdbiArguments()
@@ -27,6 +29,11 @@ public final class JdbiArguments
     public static <U extends Enum<U>> EnumArgument<U> forEnum(final Enum<U> enumValue)
     {
     	return new EnumArgument<U>(enumValue);
+    }
+
+    public static <U> PlatformIdArgument<U> forPlatformid(final PlatformId<U> platformIdValue)
+    {
+        return new PlatformIdArgument<U>(platformIdValue);
     }
 
     public static CollectionArgument<String> forStringCollection(final Collection<String> collection)
@@ -49,4 +56,3 @@ public final class JdbiArguments
         return new CollectionArgument<T>(collection, type);
     }
 }
-
