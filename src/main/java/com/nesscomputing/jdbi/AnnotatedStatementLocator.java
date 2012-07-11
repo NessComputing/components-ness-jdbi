@@ -47,25 +47,39 @@ public class AnnotatedStatementLocator implements StatementLocator
 
     private final String defaultClassName;
 
-    public AnnotatedStatementLocator(final Object annotatedClass)
+    public AnnotatedStatementLocator(final Object annotatedObject)
+    {
+        this(annotatedObject.getClass(), null);
+    }
+
+    public AnnotatedStatementLocator(final Object annotatedObject, final StatementLocator defaultLocator)
+    {
+        this(annotatedObject.getClass(), defaultLocator, "@");
+    }
+
+    public AnnotatedStatementLocator(final Object annotatedObject, final StatementLocator defaultLocator, final String markerString)
+    {
+        this(annotatedObject.getClass(), defaultLocator, markerString);
+    }
+
+    public AnnotatedStatementLocator(final Class<?> annotatedClass)
     {
         this(annotatedClass, null);
     }
 
-    public AnnotatedStatementLocator(final Object annotatedClass, final StatementLocator defaultLocator)
+    public AnnotatedStatementLocator(final Class<?> annotatedClass, final StatementLocator defaultLocator)
     {
         this(annotatedClass, defaultLocator, "@");
     }
 
-    public AnnotatedStatementLocator(final Object annotatedClass, final StatementLocator defaultLocator, final String markerString)
+    public AnnotatedStatementLocator(final Class<?> annotatedClass, final StatementLocator defaultLocator, final String markerString)
     {
         this.defaultLocator = defaultLocator;
         this.markerString = markerString;
 
-        final Class<?> clazz = annotatedClass.getClass();
-        this.defaultClassName = clazz.getName();
+        this.defaultClassName = annotatedClass.getName();
 
-        this.defaultSqlLocator = new SqlLocator(clazz);
+        this.defaultSqlLocator = new SqlLocator(annotatedClass);
     }
 
     @Override

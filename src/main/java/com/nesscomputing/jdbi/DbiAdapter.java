@@ -18,6 +18,7 @@ package com.nesscomputing.jdbi;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.IDBI;
 import org.skife.jdbi.v2.TransactionCallback;
+import org.skife.jdbi.v2.TransactionIsolationLevel;
 import org.skife.jdbi.v2.TransactionStatus;
 import org.skife.jdbi.v2.exceptions.CallbackFailedException;
 import org.skife.jdbi.v2.sqlobject.SqlObjectBuilder;
@@ -27,7 +28,10 @@ import org.skife.jdbi.v2.tweak.HandleCallback;
  * A delegating DBI that allows changing the actual IDBI implementation.
  *
  * If you set the wrapping c'tor argument to true, every Handle handed out by the delegate will be wrapped in a call to wrapHandle().
+ *
+ * @deprecated this class cannot be made to work reliably in the face of JDBI adding new methods to the IDBI interface
  */
+@Deprecated
 public class DbiAdapter implements IDBI
 {
     private final boolean wrapping;
@@ -169,5 +173,27 @@ public class DbiAdapter implements IDBI
         }
 
         delegate.close(sqlObject);
+    }
+
+    @Override
+    public <ReturnType> ReturnType inTransaction(TransactionIsolationLevel isolation, final TransactionCallback<ReturnType> callback)
+    throws CallbackFailedException
+    {
+        if (delegate == null) {
+            throw new IllegalStateException("No delegate has been set!");
+        }
+
+        if (!wrapping) {
+            return delegate.inTransaction(isolation, callback);
+        }
+        else {
+            return delegate.inTransaction(isolation, new TransactionCallback<ReturnType>() {
+                @Override
+                public ReturnType inTransaction(final Handle handle, final TransactionStatus transactionStatus) throws Exception
+                {
+                    return callback.inTransaction(wrapHandle(handle), transactionStatus);
+                }
+            });
+        }
     }
 }

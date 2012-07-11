@@ -36,7 +36,9 @@ import org.skife.jdbi.v2.tweak.StatementLocator;
  * </pre>
  *
  * @see AnnotatedStatementLocator
+ * @deprecated Instead, use the DatabaseModule to bind an AnnotatedDbiCustomizer
  */
+@Deprecated
 public class AnnotatedDbi extends DbiAdapter
 {
     public AnnotatedDbi(final IDBI delegate, final Object annotatedClass)
@@ -49,5 +51,3 @@ public class AnnotatedDbi extends DbiAdapter
         super(new WrappingDbi.Builder(delegate).setLocator(new AnnotatedStatementLocator(annotatedClass, defaultLocator)).build());
     }
 }
-
-
