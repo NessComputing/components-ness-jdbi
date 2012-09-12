@@ -17,7 +17,9 @@ package com.nesscomputing.jdbi.argument;
 
 import java.sql.Types;
 import java.util.Collection;
+import java.util.UUID;
 
+import com.google.common.base.Preconditions;
 import com.nesscomputing.types.PlatformId;
 
 public final class JdbiArguments
@@ -54,5 +56,22 @@ public final class JdbiArguments
     public static <T> CollectionArgument<T> forObjectCollection(final Collection<? extends T> collection, final String type)
     {
         return new CollectionArgument<T>(collection, type);
+    }
+
+    public static <T> CollectionArgument<T> forObjectCollection(final Collection<? extends T> collection)
+    {
+        Preconditions.checkArgument(!collection.isEmpty(), "Empty collections are not supported.");
+        T object = collection.iterator().next();
+        if (object instanceof String) {
+            return (CollectionArgument<T>) forStringCollection((Collection<String>) collection);
+        } else if (object instanceof Long) {
+            return (CollectionArgument<T>) forLongCollection((Collection<Long>) collection);
+        } else if (object instanceof Integer) {
+            return (CollectionArgument<T>) forIntCollection((Collection<Integer>) collection);
+        } else if (object instanceof UUID) {
+            return forObjectCollection(collection, "uuid");
+        } else {
+            throw new IllegalArgumentException(String.format("Unsupported type of collection: %s", object.getClass()));
+        }
     }
 }
