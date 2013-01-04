@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.UUID;
 
 import com.google.common.base.Preconditions;
-import com.nesscomputing.types.PlatformId;
 
 public final class JdbiArguments
 {
@@ -31,11 +30,6 @@ public final class JdbiArguments
     public static <U extends Enum<U>> EnumArgument<U> forEnum(final Enum<U> enumValue)
     {
     	return new EnumArgument<U>(enumValue);
-    }
-
-    public static <U> PlatformIdArgument<U> forPlatformid(final PlatformId<U> platformIdValue)
-    {
-        return new PlatformIdArgument<U>(platformIdValue);
     }
 
     public static CollectionArgument<String> forStringCollection(final Collection<String> collection)
