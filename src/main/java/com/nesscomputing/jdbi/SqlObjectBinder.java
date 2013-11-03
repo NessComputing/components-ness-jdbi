@@ -91,8 +91,9 @@ public final class SqlObjectBinder
                     return idbi.onDemand(sqlObjectClass);
                 case OPEN:
                     return idbi.open(sqlObjectClass);
+                default:
+                    throw new ProviderException(format("Unknown provider style: %s", style));
             }
-            throw new ProviderException(format("Unknown provider style: %s", style));
         }
     }
 }

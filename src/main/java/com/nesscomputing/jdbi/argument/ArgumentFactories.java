@@ -23,6 +23,7 @@ import org.skife.jdbi.v2.tweak.ArgumentFactory;
 import java.net.URI;
 import java.sql.Array;
 
+@SuppressWarnings("PMD.MissingStaticMethodInNonInstantiatableClass")
 final class ArgumentFactories
 {
     private ArgumentFactories()
