@@ -24,7 +24,7 @@ import com.google.inject.multibindings.Multibinder;
 /**
  * Binds a {@link ResultSetMapperFactory} so that JDBI will automatically use it
  */
-public class ResultSetMapperFactoryBinder {
+public final class ResultSetMapperFactoryBinder {
     private ResultSetMapperFactoryBinder() { }
 
     public static LinkedBindingBuilder<ResultSetMapperFactory> bindResultSetMapperFactory(Binder binder) {

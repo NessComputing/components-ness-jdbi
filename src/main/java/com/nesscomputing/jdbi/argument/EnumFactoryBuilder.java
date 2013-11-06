@@ -33,7 +33,7 @@ public class EnumFactoryBuilder
             @Override
             public boolean accepts(final Class<?> expectedType, final Object value, final StatementContext ctx)
             {
-                return (clazz.isInstance(value));
+                return clazz.isInstance(value);
             }
 
             @Override

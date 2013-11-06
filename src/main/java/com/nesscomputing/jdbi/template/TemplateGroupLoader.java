@@ -60,6 +60,7 @@ public class TemplateGroupLoader
         }
     }
 
+    @SuppressWarnings("PMD.PrematureDeclaration")
     public static StringTemplateGroup load(final String name, final URL resourceUrl)
     {
         if (resourceUrl == null) {
